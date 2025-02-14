@@ -54,7 +54,7 @@ def draw_screen():
         screen.blit(cookie_image, cookie_rect)
 
     # Draw the score
-    score_text = font.render(f"Score: {score}", True, BLACK)
+    score_text = font.render(f"Cookies: {score}", True, BLACK)
     screen.blit(score_text, (10, 10))
 
     # Draw the buttons

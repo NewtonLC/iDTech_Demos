@@ -42,6 +42,15 @@ pipes = []
 pipe_spawn_time = 2000  # Time in milliseconds between pipe spawns
 last_pipe_spawn_time = pygame.time.get_ticks()
 
+# Function to spawn pipes
+def spawn_pipe():
+    current_time = pygame.time.get_ticks()
+    if current_time - last_pipe_spawn_time > pipe_spawn_time:
+        pipe_y = get_random_pipe_y()
+        pipes.append((width, pipe_y))
+        return current_time
+    return last_pipe_spawn_time
+    
 # Main game loop
 running = True
 clock = pygame.time.Clock()
@@ -63,14 +72,8 @@ while running:
         bird_speed = 0
 
     # Spawn new pipes at regular intervals
-    """
-    current_time = pygame.time.get_ticks()
-    if current_time - last_pipe_spawn_time > pipe_spawn_time:
-        pipe_y = get_random_pipe_y()
-        pipes.append((width, pipe_y))
-        last_pipe_spawn_time = current_time
-    """
-
+    last_pipe_spawn_time = spawn_pipe()
+    
     # Update pipe positions
     pipes = [(x - pipe_speed, y) for x, y in pipes if x - pipe_speed > -pipe_width]
 
